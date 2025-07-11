@@ -8,7 +8,6 @@ const app = express()
 const port = 4000
 
 
-
 app.use(middleware);
 app.use(morgan('tiny'));
 app.use(express.json());
