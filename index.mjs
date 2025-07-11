@@ -2,12 +2,24 @@ import express from 'express';
 import morgan from 'morgan';
 import 'dotenv/config'
 import mongoose from 'mongoose';
+import Task from './Modals/TaskModal';
 
 const app = express()
 const port = 4000
 
+function middleware(req, res, next) {
+  // console.log("middleware", Date.now())
+  req.requestBy = "Me"
+  // req.status{500}.send('Internal Server Error'); //iskey zariyee hum request lo beech me hi rok saktey hen
+  next();
+}
+
+app.use(middleware);
+app.use(morgan('tiny'));
+
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  console.log("req.requestBy",req.requestBy);
+  res.status(200).send(Task)
 })
 
 app.use(express.json());
