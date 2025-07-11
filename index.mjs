@@ -7,6 +7,12 @@ import Task from './Modals/TaskModal';
 const app = express()
 const port = 4000
 
+
+
+app.use(middleware);
+app.use(morgan('tiny'));
+app.use(express.json());
+
 function middleware(req, res, next) {
   // console.log("middleware", Date.now())
   req.requestBy = "Me"
@@ -14,8 +20,6 @@ function middleware(req, res, next) {
   next();
 }
 
-app.use(middleware);
-app.use(morgan('tiny'));
 
 app.get('/', (req, res) => {
   console.log("req.requestBy",req.requestBy);
